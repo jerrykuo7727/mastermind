@@ -1,9 +1,7 @@
 class Mastermind
   attr_reader :answer
   def initialize
-  	answer = []
-  	4.times { answer << (rand(6) + 1).to_s }
-  	@answer = answer
+  	@answer = generate_answer
   end
 
   def guess(num)
@@ -12,9 +10,19 @@ class Mastermind
   	  return true
   	else
   	  a = get_A(num)
-  	  puts "Try again, #{a}A.  "
+  	  b = get_B(num)
+  	  puts "Try again, #{a}A#{b}B.  "
   	  return false
   	end
+  end
+
+  def generate_answer
+  	answer = []
+  	until answer.size == 4 do
+  	  num = (rand(6) + 1).to_s
+  	  answer << num unless answer.include?(num) 
+  	end
+  	answer
   end
 
   def get_A(num)
@@ -26,6 +34,11 @@ class Mastermind
   end
 
   def get_B(num)
+  	b = 0
+  	@answer.each_with_index do |e, i|
+  	  b += 1 if e != num[i] && num.include?(e)
+  	end
+  	return b
   end
 end
 
