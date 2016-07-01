@@ -8,13 +8,21 @@ class Mastermind
 
   def guess(num)
   	if num == answer
+  	  puts "Bingo! That's the answer!"
   	  return true
   	else
+  	  a = get_A(num)
+  	  puts "Try again, #{a}A.  "
   	  return false
   	end
   end
 
   def get_A(num)
+    a = 0
+    num.each_with_index do |e, i|
+    	a += 1 if e == @answer[i]
+    end
+    return a
   end
 
   def get_B(num)
@@ -23,4 +31,4 @@ end
 
 mastermind = Mastermind.new
 p mastermind.answer
-p mastermind.guess(mastermind.answer)
+p mastermind.guess(["1", "2", "3", "4"])
