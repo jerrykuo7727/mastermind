@@ -8,7 +8,7 @@ class Mastermind
   def ask_to_guess
   	while @guesses > 0 do
   	  break if @win
-      print "#{@guesses} guesses left: "
+      print "#{@guesses.to_s.rjust(2)} guesses left: "
       input = gets.chomp.split("")
       if guess_valid?(input)
         win = guess(input)
